@@ -4,4 +4,4 @@ Cliente e servidor simples para estudo prático da matéria de sistemas operacio
 
 Para executar:
 
-python server_client.py -f [server/client] -hx [ip] -p [port]
+  python server_client.py -f [server/client] -hx [ip] -p [port]
