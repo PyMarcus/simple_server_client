@@ -71,8 +71,8 @@ def client(server_address: str, server_port: int) -> None:
         if message_from_server:
             print(f"Server diz: {message_from_server}")
             if "Parabéns!" not in  message_from_server and "Resposta incorreta!" not in message_from_server and "Resposta inválida" not in message_from_server:
-                message_to_server = input("Responder: ").encode(UTF8)
-                sock.send(message_to_server)
+                message_to_server = input("Responder: ")
+                sock.send(message_to_server.encode(UTF8))
         else:
             sock.close()
             break
