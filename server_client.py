@@ -63,10 +63,10 @@ def server_worker(sock: Socket) -> None:
 
 
 def client(server_address: str, server_port: int) -> None:
-    text: str = ''
+    message_to_server: str = ''
     sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     sock.connect((server_address, server_port))
-    while text != EXIT:
+    while message_to_server != EXIT:
         message_from_server = sock.recv(BYTES).decode(UTF8)
         if message_from_server:
             print(f"Server diz: {message_from_server}")
