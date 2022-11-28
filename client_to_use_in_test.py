@@ -26,4 +26,4 @@ def main():
         
         
 if __name__ == '__main__':
-        client('localhost', 9997)
+        main()
