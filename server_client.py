@@ -4,6 +4,7 @@ import configparser
 import threading
 from typing import TypeVar, Dict
 from string import ascii_lowercase
+import time
 
 Socket = TypeVar("Socket")
 RIGHT_ANSWERS = ['a', 'a', 'd', 'c', 'a']
@@ -43,6 +44,7 @@ def server(host: str, port: int) -> None:
 
 def server_worker(sock: Socket) -> None:
     i: int = 0
+    s = sock
     for key, value in read_questions().items():
         sock.send(f"{key}  {value}".encode(UTF8))
         response = sock.recv(BYTES)
@@ -51,14 +53,16 @@ def server_worker(sock: Socket) -> None:
         if response:
             if response.decode(UTF8).lower() in ascii_lowercase:
                 if response.decode(UTF8).lower() == RIGHT_ANSWERS[i]:
-                    sock.send("Parabéns!".encode(UTF8))
+                    s.send("Parabéns!".encode(UTF8))
                 else:
-                    sock.send("Resposta incorreta!".encode(UTF8))
+                    s.send("Resposta incorreta!".encode(UTF8))
                 i += 1
             else:
-                sock.send("Resposta inválida".encode(UTF8))
+                s.send("Resposta inválida".encode(UTF8))
         else:
-            sock.send("Resposta inválida".encode(UTF8))
+            s.send("Resposta inválida".encode(UTF8))
+        time.sleep(1)
+    sock.send("FIM".encode(UTF8))
     sock.close()
 
 
