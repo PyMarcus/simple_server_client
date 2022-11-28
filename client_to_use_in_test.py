@@ -3,6 +3,7 @@ import argparse
 
 
 def client(ip, port):
+    # Cria cliente com loop aguardando perguntas do servidor
     s = socket.socket()
     s.connect((ip, port))    
     while True:
@@ -13,9 +14,11 @@ def client(ip, port):
             break
         message_to_server = input("Responder: ")
         s.send(message_to_server.encode())
+    s.close()
 
 
 def main():
+    # trata linha de comando para agilizar
     args = argparse.ArgumentParser(description="Server and client")
     args.add_argument("-f", help="function [server] or [client]")
     args.add_argument("-p", help="port", type=int)
@@ -26,4 +29,4 @@ def main():
         
         
 if __name__ == '__main__':
-        main()
+    main()
